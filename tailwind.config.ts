@@ -18,7 +18,7 @@ export default {
 			}
 		},
 		fontFamily: {
-			serif: ['Merriweather', 'Georgia', 'serif'],
+			heading: ['Montserrat', 'system-ui', 'sans-serif'],
 			sans: ['Open Sans', 'system-ui', 'sans-serif'],
 		},
 		extend: {
