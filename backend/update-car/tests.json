@@ -1,0 +1,1 @@
+{"tests": [{"name": "Update car price", "method": "POST", "path": "/", "body": {"id": 1, "pricePerDay": 2600}, "expectedStatus": 200, "expectedBody": {"success": true}, "bodyMatcher": "partial"}]}

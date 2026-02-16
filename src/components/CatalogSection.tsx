@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import CarCard from "@/components/CarCard";
 import type { Car } from "@/data/cars";
 
-const categories = ["Все", "Эконом", "Комфорт", "Кроссовер", "Премиум"];
+const categories = ["Все", "Эконом", "Комфорт", "Кроссовер", "Коммерческий"];
 
 interface CatalogSectionProps {
   cars: Car[];

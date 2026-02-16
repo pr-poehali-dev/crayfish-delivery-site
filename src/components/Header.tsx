@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
-  const isAdmin = location.pathname === "/admin";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border shadow-sm">
@@ -31,13 +29,6 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link to={isAdmin ? "/" : "/admin"}>
-            <Button variant={isAdmin ? "default" : "outline"} size="sm">
-              <Icon name={isAdmin ? "Globe" : "Settings"} size={16} />
-              <span className="ml-1.5">{isAdmin ? "На сайт" : "Админка"}</span>
-            </Button>
-          </Link>
-
           <a href="tel:+74951234567" className="hidden md:flex">
             <Button variant="default" size="sm">
               <Icon name="Phone" size={16} />

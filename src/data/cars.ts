@@ -72,7 +72,7 @@ export const defaultCars: Car[] = [
   {
     id: 7,
     name: "Mercedes-Benz E-Class",
-    category: "Премиум",
+    category: "Коммерческий",
     pricePerDay: 9500,
     image: "https://cdn.poehali.dev/projects/b5543c12-068b-408f-91fc-77a9bfe8de0a/files/93c148c9-935b-4ea6-8c40-7d7a1feac0d2.jpg",
     description: "Флагман комфорта и престижа. Роскошный салон, передовые технологии и безупречный стиль.",
@@ -81,7 +81,7 @@ export const defaultCars: Car[] = [
   {
     id: 8,
     name: "BMW 5 Series",
-    category: "Премиум",
+    category: "Коммерческий",
     pricePerDay: 9000,
     image: "https://cdn.poehali.dev/projects/b5543c12-068b-408f-91fc-77a9bfe8de0a/files/93c148c9-935b-4ea6-8c40-7d7a1feac0d2.jpg",
     description: "Спортивный характер в сочетании с представительской роскошью. Идеален для деловых поездок.",
@@ -90,7 +90,7 @@ export const defaultCars: Car[] = [
   {
     id: 9,
     name: "Audi A6",
-    category: "Премиум",
+    category: "Коммерческий",
     pricePerDay: 8500,
     image: "https://cdn.poehali.dev/projects/b5543c12-068b-408f-91fc-77a9bfe8de0a/files/93c148c9-935b-4ea6-8c40-7d7a1feac0d2.jpg",
     description: "Воплощение прогресса через технологии. Полный привод quattro и цифровая кабина.",
@@ -126,7 +126,7 @@ export const defaultCars: Car[] = [
   {
     id: 13,
     name: "Mercedes-Benz GLE",
-    category: "Премиум",
+    category: "Коммерческий",
     pricePerDay: 12000,
     image: "https://cdn.poehali.dev/projects/b5543c12-068b-408f-91fc-77a9bfe8de0a/files/93c148c9-935b-4ea6-8c40-7d7a1feac0d2.jpg",
     description: "Люксовый полноразмерный SUV. Максимальный комфорт, мощный двигатель, полный привод.",
@@ -144,7 +144,7 @@ export const defaultCars: Car[] = [
   {
     id: 15,
     name: "Genesis G80",
-    category: "Премиум",
+    category: "Коммерческий",
     pricePerDay: 10000,
     image: "https://cdn.poehali.dev/projects/b5543c12-068b-408f-91fc-77a9bfe8de0a/files/93c148c9-935b-4ea6-8c40-7d7a1feac0d2.jpg",
     description: "Корейский премиум-седан, конкурирующий с немецкой тройкой. Роскошь, тишина и мощь.",

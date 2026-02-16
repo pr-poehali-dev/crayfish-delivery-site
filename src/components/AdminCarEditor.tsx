@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,10 +13,13 @@ interface AdminCarEditorProps {
   open: boolean;
   onClose: () => void;
   onSave: (id: number, updates: Partial<Car>) => void;
+  onUploadImage: (carId: number, file: File) => Promise<void>;
 }
 
-const AdminCarEditor = ({ car, open, onClose, onSave }: AdminCarEditorProps) => {
+const AdminCarEditor = ({ car, open, onClose, onSave, onUploadImage }: AdminCarEditorProps) => {
   const [form, setForm] = useState<Partial<Car>>({});
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const currentCar = car ? { ...car, ...form } : null;
   if (!currentCar) return null;
@@ -44,6 +47,25 @@ const AdminCarEditor = ({ car, open, onClose, onSave }: AdminCarEditorProps) => 
     }));
   };
 
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !car) return;
+
+    const allowed = ["image/png", "image/jpeg", "image/jpg"];
+    if (!allowed.includes(file.type)) {
+      alert("Допустимы только форматы PNG и JPG/JPEG");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      await onUploadImage(car.id, file);
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -55,21 +77,32 @@ const AdminCarEditor = ({ car, open, onClose, onSave }: AdminCarEditorProps) => 
         </DialogHeader>
 
         <div className="space-y-5">
-          <div className="rounded-xl overflow-hidden border border-border">
-            <img
-              src={currentCar.image}
-              alt={currentCar.name}
-              className="w-full h-48 object-cover"
-            />
-          </div>
-
-          <div>
-            <Label className="text-sm mb-1.5 block">URL фотографии</Label>
-            <Input
-              value={currentCar.image}
-              onChange={(e) => updateField("image", e.target.value)}
-              placeholder="https://..."
-            />
+          <div className="relative rounded-xl overflow-hidden border border-border group">
+            {currentCar.image ? (
+              <img src={currentCar.image} alt={currentCar.name} className="w-full h-48 object-cover" />
+            ) : (
+              <div className="w-full h-48 bg-muted flex items-center justify-center">
+                <Icon name="ImageOff" size={40} className="text-muted-foreground" />
+              </div>
+            )}
+            <label className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer flex items-center justify-center gap-2">
+              {uploading ? (
+                <span className="text-white text-sm font-medium">Загрузка...</span>
+              ) : (
+                <>
+                  <Icon name="Upload" size={20} className="text-white" />
+                  <span className="text-white text-sm font-medium">Загрузить фото (PNG / JPG)</span>
+                </>
+              )}
+              <input
+                ref={fileRef}
+                type="file"
+                accept=".png,.jpg,.jpeg"
+                className="hidden"
+                onChange={handleFileChange}
+                disabled={uploading}
+              />
+            </label>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -93,7 +126,7 @@ const AdminCarEditor = ({ car, open, onClose, onSave }: AdminCarEditorProps) => 
                   <SelectItem value="Эконом">Эконом</SelectItem>
                   <SelectItem value="Комфорт">Комфорт</SelectItem>
                   <SelectItem value="Кроссовер">Кроссовер</SelectItem>
-                  <SelectItem value="Премиум">Премиум</SelectItem>
+                  <SelectItem value="Коммерческий">Коммерческий</SelectItem>
                 </SelectContent>
               </Select>
             </div>

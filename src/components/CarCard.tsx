@@ -12,19 +12,25 @@ interface CarCardProps {
 const categoryColors: Record<string, string> = {
   "Эконом": "bg-green-100 text-green-700",
   "Комфорт": "bg-blue-100 text-blue-700",
-  "Премиум": "bg-purple-100 text-purple-700",
+  "Коммерческий": "bg-purple-100 text-purple-700",
   "Кроссовер": "bg-orange-100 text-orange-700",
 };
 
 const CarCard = ({ car, onBook }: CarCardProps) => {
   return (
     <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-border/50">
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={car.image}
-          alt={car.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+      <div className="relative h-48 overflow-hidden bg-muted">
+        {car.image ? (
+          <img
+            src={car.image}
+            alt={car.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <Icon name="Car" size={48} className="text-muted-foreground/30" />
+          </div>
+        )}
         <div className="absolute top-3 left-3">
           <Badge className={`${categoryColors[car.category] || "bg-gray-100 text-gray-700"} border-0 font-medium`}>
             {car.category}
